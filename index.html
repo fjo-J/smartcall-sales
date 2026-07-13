@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartCall 営業資料 | 株式会社西河マネジメントセンター</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--navy:#0d1f3c;--navy2:#1a3560;--orange:#ea580c;--ol:rgba(234,88,12,0.1);--gold:#d97706;--bg:#f8f6f2;--muted:#7a7065;--bc:rgba(13,31,60,0.08)}
+  body{font-family:'Noto Sans JP',sans-serif;background:#11182b;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px}
+  .topbar{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap;justify-content:center}
+  .tabs{display:flex;gap:4px;flex-wrap:wrap;justify-content:center}
+  .tab{padding:6px 12px;border-radius:8px;font-size:12px;font-weight:500;border:none;cursor:pointer;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.45);font-family:inherit;transition:background .2s,color .2s}
+  .tab.active{background:var(--orange);color:#fff}
+  .dv{width:1px;height:20px;background:rgba(255,255,255,0.12)}
+  .pdf-btn{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;border:none;cursor:pointer;background:rgba(234,88,12,0.85);color:#fff;font-family:inherit}
+  .pdf-btn:disabled{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.35);cursor:not-allowed}
+  .deck-wrap{position:relative;width:min(1100px,95vw);aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.5)}
+  .slide{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .22s}
+  .slide.active{opacity:1;pointer-events:auto}
+  .nav-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:20;width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:opacity .2s}
+  .nav-btn:disabled{opacity:0;pointer-events:none}
+  .nav-btn.prev{left:12px}.nav-btn.next{right:12px}
+  .nd{background:rgba(255,255,255,0.15);color:#fff}.nl{background:rgba(13,31,60,0.08);color:var(--navy)}
+  .dots{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:20}
+  .dot{height:8px;border-radius:4px;background:rgba(255,255,255,0.35);width:8px;transition:width .3s,background .3s}
+  .dot.active{width:24px;background:var(--orange)}
+  .hint{margin-top:12px;font-size:11px;color:rgba(255,255,255,0.2);text-align:center}
+  .si{width:100%;height:100%;display:flex;flex-direction:column}
+  .sh{display:flex;align-items:center;gap:16px;padding:20px 56px;background:var(--navy);flex-shrink:0}
+  .sh .bar{width:4px;height:32px;border-radius:2px;background:var(--orange);flex-shrink:0}
+  .sh .lbl{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,0.45)}
+  .sh h2{font-size:18px;font-weight:700;color:#fff}
+  .sb{flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 56px;gap:16px;overflow:hidden}
+  .ft{padding:0 56px 14px;display:flex;justify-content:flex-end;flex-shrink:0;font-size:11px}
+  .ftl{color:#b8b2a8}.ftd{color:rgba(255,255,255,0.25)}
+  .card{background:#fff;border-radius:16px;padding:20px;border:1px solid var(--bc);position:relative;overflow:hidden;display:flex;flex-direction:column;gap:12px}
+  .card::after{content:'';position:absolute;top:0;right:0;width:64px;height:64px;background:radial-gradient(circle at 100% 0%,var(--orange) 0%,transparent 70%);opacity:.1}
+  .ib{width:40px;height:40px;border-radius:10px;background:var(--ol);color:var(--orange);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .tp{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--ol);color:var(--orange);margin-bottom:4px}
+  .ct{font-size:13px;font-weight:700;color:var(--navy)}
+  .cd{font-size:11px;line-height:1.7;color:var(--muted)}
+  .notice{border-radius:12px;padding:12px 18px;display:flex;align-items:center;gap:12px;background:rgba(13,31,60,0.05);border:1px solid rgba(13,31,60,0.08);flex-shrink:0}
+  .nd2{width:8px;height:8px;border-radius:50%;background:var(--orange);flex-shrink:0}
+  .notice p,.nto p{font-size:12px;font-weight:500;color:var(--navy);line-height:1.6}
+  .nto{border-radius:12px;padding:12px 18px;display:flex;align-items:center;gap:12px;background:rgba(234,88,12,0.07);border:1px solid rgba(234,88,12,0.2);flex-shrink:0}
+  .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .fl{display:flex;flex-direction:column;gap:8px}
+  .fr2{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--navy)}
+  /* S1 */
+  #s1{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,var(--navy) 100%);overflow:hidden}
+  #s1::before{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 55%,rgba(234,88,12,.18) 55%,rgba(234,88,12,.06) 100%);pointer-events:none}
+  #s1::after{content:'';position:absolute;top:0;right:0;width:288px;height:288px;background:radial-gradient(circle at 80% 20%,var(--orange) 0%,transparent 70%);opacity:.2;pointer-events:none}
+  .s1s{position:absolute;top:0;left:0;right:0;height:4px;background:var(--orange);z-index:2}
+  .s1i{position:relative;z-index:2;display:flex;flex-direction:column;height:100%;padding:36px 64px;justify-content:space-between}
+  .s1t{display:flex;align-items:center;justify-content:space-between}
+  .s1lo{display:flex;align-items:center;gap:12px}
+  .s1li{width:40px;height:40px;border-radius:10px;background:var(--orange);display:flex;align-items:center;justify-content:center}
+  .s1ln{color:#fff;font-size:18px;font-weight:700;letter-spacing:.06em}
+  .s1pa{padding:6px 14px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(234,88,12,.25);color:#fba97a;border:1px solid rgba(234,88,12,.4)}
+  .s1m{display:flex;flex-direction:column;gap:18px;max-width:700px}
+  .s1ba{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;font-size:11px;font-weight:500;background:rgba(234,88,12,.2);color:#fba97a;width:fit-content}
+  .s1h{font-size:clamp(22px,3.2vw,42px);font-weight:900;color:#fff;line-height:1.3}
+  .s1h em{color:var(--orange);font-style:normal}
+  .s1su{font-size:13px;font-weight:300;line-height:1.8;color:rgba(255,255,255,.72)}
+  .s1pb{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:500;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);width:fit-content}
+  .s1cl label{font-size:11px;font-weight:500;color:rgba(255,255,255,.45);display:block;margin-bottom:2px}
+  .s1cl span{font-size:13px;font-weight:600;color:rgba(255,255,255,.75)}
+  /* S3 */
+  #s3{flex-direction:row!important}
+  .s3l{width:40%;display:flex;flex-direction:column;justify-content:space-between;padding:28px 36px;background:var(--navy);position:relative;overflow:hidden;flex-shrink:0}
+  .s3l::before{content:'';position:absolute;bottom:0;left:0;right:0;height:192px;background:radial-gradient(ellipse at 0% 100%,var(--orange) 0%,transparent 70%);opacity:.2}
+  .s3ls{position:absolute;top:0;left:0;right:0;height:4px;background:var(--orange)}
+  .s3lb{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:4px}
+  .s3lh{font-size:clamp(20px,2.2vw,28px);font-weight:900;color:#fff;line-height:1.35;position:relative;z-index:1}
+  .s3lh em{color:var(--orange);font-style:normal}
+  .s3ic{width:56px;height:56px;border-radius:14px;background:var(--orange);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+  .s3lp{font-size:12px;line-height:1.8;color:rgba(255,255,255,.65)}
+  .s3co{font-size:11px;color:rgba(255,255,255,.3);position:relative;z-index:1}
+  .s3r{flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 32px;gap:12px;background:var(--bg);overflow:hidden}
+  .s3rh{font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--orange)}
+  .frw{display:flex;align-items:flex-start;gap:12px;background:#fff;border-radius:12px;padding:14px;border:1px solid rgba(13,31,60,.07)}
+  .fwn{font-size:11px;font-weight:900;color:var(--orange);flex-shrink:0;margin-top:2px}
+  .fwt{font-size:12px;font-weight:500;line-height:1.6;color:var(--navy)}
+  .s3ca{border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);flex-shrink:0}
+  .s3ca p{font-size:12px;font-weight:500;color:#fff;line-height:1.5}
+  /* S4 */
+  #s4{background:var(--bg)}
+  .c4{background:#fff;border-radius:16px;padding:20px;border:1px solid rgba(13,31,60,.07);display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden}
+  .c4b{position:absolute;top:0;left:0;width:4px;height:100%;background:var(--orange);opacity:.7}
+  .c4t{display:flex;align-items:center;gap:10px}
+  .c4f{font-size:10px;font-weight:900;letter-spacing:.08em;color:rgba(13,31,60,.25)}
+  .c4ti{font-size:13px;font-weight:700;color:var(--navy)}
+  .c4d{font-size:11px;line-height:1.7;color:var(--muted)}
+  /* S5 */
+  #s5{background:var(--navy);overflow:hidden}
+  #s5::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 90% 100%,rgba(234,88,12,.2) 0%,transparent 60%);pointer-events:none}
+  .s5b{flex:1;display:flex;flex-direction:column;justify-content:center;padding:12px 56px 8px;gap:16px;position:relative;z-index:1;overflow:hidden}
+  .sc2{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px}
+  .sn2{display:flex;align-items:baseline;gap:4px}
+  .sb3{font-size:clamp(32px,3.5vw,52px);font-weight:900;line-height:1;color:#fff}
+  .sb3.o{color:var(--orange)}
+  .su2{font-size:clamp(16px,2vw,22px);font-weight:700;color:var(--orange)}
+  .su2.w{color:#fff;font-size:clamp(14px,1.5vw,18px)}
+  .sl2{font-size:13px;font-weight:500;color:#fff}
+  .sd2{font-size:11px;line-height:1.7;color:rgba(255,255,255,.5)}
+  .tc2{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px;display:flex;align-items:flex-start;gap:16px;flex-shrink:0}
+  .tic{width:44px;height:44px;border-radius:12px;background:var(--orange);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .sts{display:flex;gap:3px;align-items:center;margin-bottom:8px}
+  .stl{font-size:11px;font-weight:600;color:rgba(255,255,255,.5);margin-left:6px}
+  .tc2 p{font-size:12px;font-weight:500;color:#fff;line-height:1.7}
+  .ta{font-size:11px;font-weight:700;color:var(--orange);margin-top:8px}
+  /* S6 */
+  #s6{background:var(--bg)}
+  .s6b{flex:1;display:flex;gap:16px;padding:16px 56px;align-items:center}
+  .pc2{flex:1;border-radius:16px;overflow:hidden;border:2px solid var(--orange);display:flex;flex-direction:column}
+  .ph2{padding:20px;background:var(--orange);display:flex;align-items:center;justify-content:space-between}
+  .phl{font-size:11px;font-weight:700;color:rgba(255,255,255,.8);letter-spacing:.08em;margin-bottom:4px}
+  .pht{font-size:17px;font-weight:900;color:#fff}
+  .phb{padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;background:rgba(255,255,255,.2);color:#fff}
+  .pb2{background:#fff;flex:1;padding:20px;display:flex;flex-direction:column;gap:14px}
+  .pr2{display:flex;align-items:baseline;gap:6px}
+  .prs{font-size:11px;font-weight:500;color:var(--muted)}
+  .prb{font-size:clamp(26px,2.8vw,38px);font-weight:900;color:var(--navy);line-height:1}
+  .prf{font-size:12px;color:var(--muted)}
+  .prn{font-size:11px;color:var(--muted);margin-top:-8px}
+  .sc3{flex:1;border-radius:16px;overflow:hidden;border:2px solid var(--orange);display:flex;flex-direction:column}
+  .sh2{padding:20px;background:var(--orange)}
+  .shl{font-size:11px;font-weight:700;color:rgba(255,255,255,.8);letter-spacing:.08em;margin-bottom:4px}
+  .sht{font-size:15px;font-weight:900;color:#fff;line-height:1.4}
+  .shs{font-size:12px;font-weight:600;color:rgba(255,255,255,.85)}
+  .sb4{background:#fff;flex:1;padding:20px;display:flex;flex-direction:column;gap:14px}
+  .snb{border-radius:10px;padding:12px 14px;background:rgba(234,88,12,.07);border:1px solid rgba(234,88,12,.2);font-size:11px;font-weight:500;color:var(--navy);line-height:1.6}
+  /* S7 */
+  #s7{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);overflow:hidden}
+  #s7::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 120%,rgba(234,88,12,.25) 0%,transparent 60%);pointer-events:none}
+  .s7b{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:0 56px 8px;position:relative;z-index:1}
+  .s7h{font-size:clamp(16px,2.5vw,30px);font-weight:900;color:#fff;line-height:1.4;margin-bottom:8px;text-align:center}
+  .s7h em{color:var(--orange);font-style:normal}
+  .s7su{font-size:13px;font-weight:300;color:rgba(255,255,255,.6);text-align:center}
+  .g3s{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;max-width:640px}
+  .stc2{border-radius:12px;padding:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;gap:6px}
+  .stn{font-size:11px;font-weight:900;color:var(--orange)}
+  .stt{font-size:12px;font-weight:700;color:#fff}
+  .std{font-size:11px;line-height:1.6;color:rgba(255,255,255,.5)}
+  .cb{display:flex;align-items:center;gap:18px;padding:18px 32px;border-radius:16px;background:var(--orange)}
+  .ci{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .cnum{font-size:clamp(18px,2vw,26px);font-weight:900;color:#fff;letter-spacing:.05em}
+  .clbl{font-size:12px;font-weight:500;color:rgba(255,255,255,.8);margin-bottom:4px}
+  .cdv{width:1px;height:44px;background:rgba(255,255,255,.3);flex-shrink:0}
+  .csd{font-size:11px;color:rgba(255,255,255,.7);line-height:1.8}
+  .s7ft{padding:0 56px 14px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;flex-shrink:0}
+  .s7flo{display:flex;align-items:center;gap:8px}
+  .s7fic{width:24px;height:24px;border-radius:4px;background:var(--orange);display:flex;align-items:center;justify-content:center}
+  /* print */
+  @media print{
+    @page{size:A4 landscape;margin:0}
+    html,body{background:white!important;padding:0!important;margin:0!important;display:block!important;width:297mm!important;height:210mm!important}
+    .topbar,.hint,.nav-btn,.dots{display:none!important}
+    .deck-wrap{width:297mm!important;height:auto!important;aspect-ratio:auto!important;border-radius:0!important;box-shadow:none!important;position:static!important}
+    .slide{position:relative!important;opacity:1!important;pointer-events:auto!important;width:297mm!important;height:210mm!important;page-break-after:always!important;break-after:page!important;page-break-inside:avoid!important;break-inside:avoid!important}
+    .slide:last-child{page-break-after:auto!important;break-after:auto!important}
+    #s3{display:flex!important}
+  }
+  @media(max-width:700px){
+    .g3,.g2,.g3s{grid-template-columns:1fr}
+    #s3{flex-direction:column!important}
+    .s3l{width:100%;padding:20px}
+    .s6b{flex-direction:column;padding:12px 20px}
+    .sb,.s3r,.s5b,.s7b{padding-left:20px;padding-right:20px}
+    .sh{padding:16px 20px}
+    .ft,.s7ft{padding-left:20px;padding-right:20px}
+    .s1i{padding:20px}
+    .cb{flex-wrap:wrap}
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="tabs" id="tabs"></div>
+  <div class="dv"></div>
+  <button class="pdf-btn" onclick="downloadPDF()">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    PDFダウンロード
+  </button>
+</div>
+<div class="deck-wrap" id="deck">
+  <!-- S1 -->
+  <div class="slide active" id="s1"><div class="s1s"></div><div class="s1i"><div class="s1t"><div class="s1lo"><div class="s1li"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 5.76 5.76l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.28 16z"/></svg></div><span class="s1ln">SmartCall</span></div><div class="s1pa">特許取得済み</div></div><div class="s1m"><div class="s1ba"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>飲食店向け　AI電話自動応答システム</div><h1 class="s1h">ピーク時の<em>「今から空いてる？」</em><br>の電話をゼロに。</h1><p class="s1su">AIが24時間365日、予約受付から台帳登録まで完全自動化。<br>スタッフは接客に集中できる環境をつくります。</p><div class="s1pb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>特許第7862054号　予約システムと自動連携するAI電話</div></div><div class="s1cl"><label>提供企業</label><span>株式会社西河マネジメントセンター</span></div></div></div>
+  <!-- S2 -->
+  <div class="slide" id="s2"><div class="si"><div class="sh"><div class="bar"></div><div><div class="lbl">Slide 02</div><h2>飲食店の「電話あるある」課題</h2></div></div><div class="sb"><p style="font-size:12px;font-weight:500;color:var(--muted)">こんな悩み、ありませんか？</p><div class="g3"><div class="card"><div class="ib"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 5.76 5.76l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.28 16z"/></svg></div><div><span class="tp">機会損失</span><div class="ct">忙しくて電話に出られない</div><div class="cd">ピーク時の宴会・当日予約の電話を取り逃がし、売上の機会を失っている</div></div></div><div class="card"><div class="ib"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div><span class="tp">インバウンド</span><div class="ct">外国語対応ができない</div><div class="cd">英語・中国語・韓国語など、外国人観光客からの電話に対応できずに困っている</div></div></div><div class="card"><div class="ib"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><span class="tp">トラブル・損失</span><div class="ct">「言った・言わない」とドタキャン</div><div class="cd">口頭予約の認識齟齬、無断キャンセルによる食材廃棄ロスが繰り返される</div></div></div></div><div class="notice"><div class="nd2"></div><p>ピーク時にスタッフが電話対応に取られると、既存の来客サービスの質が下がり、リピート率にも影響します。</p></div></div><div class="ft ftl">株式会社西河マネジメントセンター</div></div></div>
+  <!-- S3 -->
+  <div class="slide" id="s3"><div class="s3l"><div class="s3ls"></div><div style="position:relative;z-index:1"><div class="s3lb">Slide 03</div><div class="s3lh">解決策<br><em>"SmartCall"</em><br>とは？</div></div><div style="position:relative;z-index:1"><div class="s3ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 5.76 5.76l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.28 16z"/></svg></div><p class="s3lp">ナビダイヤルではなく、人間のように滑らかで自然な会話でヒアリングするAIが、電話業務を丸ごと担います。</p></div><div class="s3co">株式会社西河マネジメントセンター</div></div><div class="s3r"><div class="s3rh">SmartCall の4つの柱</div><div class="frw"><div class="ib"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="fwn">01</div><div class="fwt">24時間365日、AIが電話対応</div></div><div class="frw"><div class="ib"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="fwn">02</div><div class="fwt">人間のように滑らかで自然な会話でヒアリング</div></div><div class="frw"><div class="ib"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="fwn">03</div><div class="fwt">空席確認→予約台帳への登録まで全自動完結</div></div><div class="frw"><div class="ib"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div><div class="fwn">04</div><div class="fwt">LINE・チャットワークへ即時通知</div></div><div class="s3ca"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><p>スタッフが電話に縛られず、接客・料理に集中できる環境を実現します</p></div></div></div>
+  <!-- S4 -->
+  <div class="slide" id="s4"><div class="si"><div class="sh"><div class="bar"></div><div><div class="lbl">Slide 04</div><h2>飲食店に特化した強力な機能</h2></div></div><div class="sb"><div class="g2"><div class="c4"><div class="c4b"></div><div class="c4t"><div class="ib"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><span class="c4f">FEATURE 01</span></div><div class="c4ti">主要予約台帳とリアルタイム連携</div><div class="c4d">トレタ・ebica・ホットペッパーなど主要台帳とリアルタイムで同期</div></div><div class="c4"><div class="c4b"></div><div class="c4t"><div class="ib"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="c4f">FEATURE 02</span></div><div class="c4ti">SMS自動送信でドタキャン防止</div><div class="c4d">予約完了後、地図・日時をSMSで自動送信。無断キャンセルを大幅削減</div></div><div class="c4"><div class="c4b"></div><div class="c4t"><div class="ib"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><span class="c4f">FEATURE 03</span></div><div class="c4ti">マルチリンガル対応</div><div class="c4d">英語・中国語・韓国語など多言語対応。インバウンド需要を取りこぼさない</div></div><div class="c4"><div class="c4b"></div><div class="c4t"><div class="ib"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 5.76 5.76l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.28 16z"/></svg></div><span class="c4f">FEATURE 04</span></div><div class="c4ti">営業電話を自動でブロック</div><div class="c4d">AIが営業電話を一次対応でお断り。無用な対応コストをゼロに</div></div></div><div class="nto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><p>既存の予約台帳をそのまま利用可能。新しいシステムに乗り換える必要はありません。</p></div></div><div class="ft ftl">株式会社西河マネジメントセンター</div></div></div>
+  <!-- S5 -->
+  <div class="slide" id="s5"><div class="si"><div class="sh" style="background:transparent"><div class="bar"></div><div><div class="lbl" style="color:rgba(255,255,255,.4)">Slide 05</div><h2>導入実績と圧倒的なクオリティ</h2></div></div><div class="s5b"><div class="g3"><div class="sc2"><div class="sn2"><span class="sb3">95</span><span class="su2">%</span></div><div class="sl2">ピーク時の電話対応を削減</div><div class="sd2">当日予約の漏れをゼロに。スタッフは接客に専念できます。</div></div><div class="sc2"><div class="sn2"><span class="sb3 o">0</span><span class="su2 w">件</span></div><div class="sl2">予約取り逃がし</div><div class="sd2">24時間365日AIが応答。ピーク時・深夜・休日も確実に受付。</div></div><div class="sc2"><div class="sn2"><span class="sb3">30</span><span class="su2">分+</span></div><div class="sl2">1日あたりの業務時間を削減</div><div class="sd2">電話対応・台帳入力・折り返し確認など反復業務を自動化。</div></div></div><div class="tc2"><div class="tic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><div class="sts"><svg width="13" height="13" viewBox="0 0 24 24" fill="#d97706" stroke="#d97706" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#d97706" stroke="#d97706" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#d97706" stroke="#d97706" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#d97706" stroke="#d97706" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span class="stl">導入企業の声</span></div><p>「ロイヤルホストでは約10社のAI電話を聴き比べた結果、会話の自然さと予約台帳との連携精度でSmartCallを選びました。現場スタッフからも好評です。」</p><div class="ta">ロイヤルホスト　ご担当者様</div></div></div></div><div class="ft ftd">株式会社西河マネジメントセンター</div></div></div>
+  <!-- S6 -->
+  <div class="slide" id="s6"><div class="si"><div class="sh"><div class="bar"></div><div><div class="lbl">Slide 06</div><h2>料金プランと助成金活用</h2></div></div><div class="s6b"><div class="pc2"><div class="ph2"><div><div class="phl">推奨プラン</div><div class="pht">店舗ビジネスプラン</div></div><div class="phb">飲食店向け</div></div><div class="pb2"><div><div class="pr2"><span class="prs">月額</span><span class="prb">¥15,000</span><span class="prf">〜</span></div><div class="prn">従量課金：50円/分</div></div><div class="fl"><div class="fr2"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>予約台帳リアルタイム連携</div><div class="fr2"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>多言語対応（英・中・韓）</div><div class="fr2"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>LINE / チャットワーク通知</div><div class="fr2"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>SMS自動送信（ドタキャン防止）</div><div class="fr2"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>営業電話自動ブロック</div></div></div></div><div class="sc3"><div class="sh2"><div class="shl">活用できる助成金</div><div class="sht">働き方改革推進支援助成金</div><div class="shs">（労働時間短縮・年休促進支援コース）</div></div><div class="sb4"><div><div class="pr2"><span class="prs">最大</span><span class="prb">¥140万</span><span class="prf">の助成金</span></div></div><div class="fl"><div class="fr2"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>従業員1名から適用可能</div><div class="fr2"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>賃上げ7%実施で最大140万円の助成金</div><div class="fr2"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>SmartCall導入コストを実質大幅削減</div></div><div class="snb">※助成金の詳細は担当者にお問い合わせください。申請サポートも承ります。</div></div></div></div><div class="ft ftl">株式会社西河マネジメントセンター</div></div></div>
+  <!-- S7 -->
+  <div class="slide" id="s7"><div class="si"><div class="sh" style="background:transparent"><div class="bar"></div><div><div class="lbl" style="color:rgba(255,255,255,.4)">Slide 07</div><h2>次のステップ</h2></div></div><div class="s7b"><div><div class="s7h">まずはAIの「会話力」を<br><em>直接聞いてみませんか？</em></div><div class="s7su">現在、2週間のお試しデモを実施中です。</div></div><div class="g3s"><div class="stc2"><div class="stn">STEP 01</div><div class="stt">デモ電話を体験</div><div class="std">飲食店向けデモ番号に電話してAIの会話力を確認</div></div><div class="stc2"><div class="stn">STEP 02</div><div class="stt">2週間お試し</div><div class="std">実店舗での試験導入で効果を体感</div></div><div class="stc2"><div class="stn">STEP 03</div><div class="stt">本格導入</div><div class="std">予約台帳連携など設定をカスタマイズ</div></div></div><div class="cb"><div class="ci"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 5.76 5.76l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.28 16z"/></svg></div><div><div class="clbl">飲食店向けデモ番号</div><div class="cnum">050-1725-1760</div></div><div class="cdv"></div><div class="csd">今すぐお電話ください<br>24時間365日対応</div></div></div><div class="s7ft"><div class="s7flo"><div class="s7fic"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 5.76 5.76l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.28 16z"/></svg></div><span style="font-size:13px;font-weight:700;color:#fff">SmartCall</span></div><span style="font-size:11px;color:rgba(255,255,255,.3)">株式会社西河マネジメントセンター</span></div></div></div>
+  <!-- Nav -->
+  <button class="nav-btn prev nd" id="btnPrev" onclick="go(-1)" disabled><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+  <button class="nav-btn next nd" id="btnNext" onclick="go(1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+  <div class="dots" id="dots"></div>
+</div>
+<div class="hint" id="hint">← → キーまたはボタンで操作　1 / 7</div>
+<script>
+const T=7,TI=['表紙','課題','解決策','機能','実績','料金','次のステップ'],DK=[0,4,6];let c=0;
+const te=document.getElementById('tabs');TI.forEach((t,i)=>{const b=document.createElement('button');b.className='tab'+(i===0?' active':'');b.textContent=t;b.onclick=()=>gt(i);te.appendChild(b);});
+const de=document.getElementById('dots');for(let i=0;i<T;i++){const d=document.createElement('div');d.className='dot'+(i===0?' active':'');de.appendChild(d);}
+function gt(n){if(n<0||n>=T||n===c)return;document.getElementById('s'+(c+1)).classList.remove('active');c=n;document.getElementById('s'+(c+1)).classList.add('active');up();}
+function go(d){gt(c+d);}
+function up(){const dk=DK.includes(c);document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('active',i===c));document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===c));const p=document.getElementById('btnPrev'),n=document.getElementById('btnNext');p.disabled=c===0;n.disabled=c===T-1;p.className='nav-btn prev '+(dk?'nd':'nl');n.className='nav-btn next '+(dk?'nd':'nl');document.getElementById('hint').textContent='← → キーまたはボタンで操作　'+(c+1)+' / '+T;}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown')go(1);if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(-1);});
+function downloadPDF(){const ss=document.querySelectorAll('.slide'),os=[];ss.forEach(s=>{os.push(s.getAttribute('style')||'');s.style.cssText='position:relative;opacity:1;pointer-events:auto;'});setTimeout(()=>{window.print();ss.forEach((s,i)=>{s.style.cssText=os[i];s.classList.toggle('active',i===c);});},300);}
+</script>
+</body>
+</html>
